@@ -1,0 +1,79 @@
+/* Файл: css/admin.css */
+
+/* Стили для административной панели */
+
+/* Оформление заголовка */
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Стили для ссылок в навигационных цепочках */
+.breadcrumbs a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 5px;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для таблиц */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+/* Стили для кнопок печати */
+.object-tools {
+    margin-bottom: 20px;
+}
+
+.object-tools li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.object-tools a {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.object-tools a:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для строки с товарами */
+.row1 {
+    background-color: #f9f9f9;
+}
+
+.row2 {
+    background-color: #e9ecef;
+}
+
+/* Стили для общей суммы */
+.total {
+    font-weight: bold;
+}
+
+.total td {
+    border-top: 2px solid #333;
+    padding-top: 10px;
+}

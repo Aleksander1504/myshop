@@ -1,0 +1,83 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Checkout" %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Checkout" %}</h1>
+
+    <div class="order-info">
+        <h3>{% trans "Your order" %}</h3>
+        <ul>
+            {% for item in cart %}
+                <li>
+                    {{ item.quantity }}x {{ item.product.name }}
+                    <span>${{ item.total_price }}</span>
+                </li>
+            {% endfor %}
+            {% if cart.coupon %}
+                <li>
+                    "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+                    <span>- ${{ cart.get_discount|floatformat:"2" }}</span>
+                </li>
+            {% endif %}
+        </ul>
+        <p>{% trans "Total" %}: ${{ cart.get_total_price_after_discount|floatformat:"2" }}</p>
+    </div>
+
+    <style>
+        .order-form {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+    
+        .order-form p {
+            margin-bottom: 15px;
+        }
+    
+        .order-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+        .order-form input[type="text"],
+        .order-form input[type="email"],
+        .order-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+    
+        .order-form input[type="submit"] {
+            background-color: #ccc;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    
+        .order-form input[type="submit"]:hover {
+            background-color: #bbb;
+        }
+    </style>
+    <form action="." method="post" class="order-form">
+        {{ form.as_p }}
+        <p><input type="submit" value="{% trans "Place order" %}"></p>
+        {% csrf_token %}
+    </form>
+{% endblock %}

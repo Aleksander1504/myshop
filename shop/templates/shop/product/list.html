@@ -1,0 +1,39 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+    <div id="sidebar">
+        <h3>Categories</h3>
+        <ul>
+            <li {% if not category %}class="selected"{% endif %}>
+                <a href="{% url "shop:product_list" %}">All</a>
+            </li>
+            {% for c in categories %}
+                <li {% if category and category.slug == c.slug %}class="selected"{% endif %}>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="main" class="product-list">
+        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+        <div class="products-container" style="background-color: #ffffff; padding: 20px; display: flex; flex-wrap: wrap; justify-content: center;">
+            {% for product in products %}
+                <div class="product-item" style="width: 200px; margin: 10px; overflow: hidden;">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="{{ product.name }}" style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
+                    </a>
+                    <div class="product-info" style="text-align: center;">
+                        <a href="{{ product.get_absolute_url }}" class="product-name" style="display: block; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ product.name }}</a>
+                        <span class="product-price">${{ product.price }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No products found.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock %}
